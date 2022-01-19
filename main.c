@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "EDFilas.h"
 #include "EDPila.h"
 
@@ -29,7 +28,7 @@ int pilaFila(TPila *pP,TFila *pF){
 }
 
 int pilaFila2(TPila *pP, TFila *pF, TFila *ptr) {
-    int dato = 5,z,x,r;
+    int dato = 5,z,x,r,y;
     AgregarAFila(pF,&dato);
     dato = 6;
     AgregarAFila(pF,&dato);
@@ -51,18 +50,19 @@ int pilaFila2(TPila *pP, TFila *pF, TFila *ptr) {
     while (FilaVacia(*pF)!=1){
         QuitardeFila(pF,&dato);
         x = dato;
-        if (dato==0){
+        if (x==0){
             z=0;
             while (PilaVacia(*pP)!=1){
                 Desapilar(pP,&dato);
-                z = z + 1;
+                y = dato;
+                z = z + y;
                 AgregarAFila(ptr,&z);
             }
         } else{
             Apilar(pP,&x);
         }
     }
-    Desapilar(pP,&dato);
+    QuitardeFila(ptr,&dato);
     r = dato;
     return r;
 }
@@ -81,7 +81,7 @@ int main() {
     CrearFila(&Q2,sizeof (dato));
     CrearPila(&S, sizeof(dato));
     res2 = pilaFila2(&S, &Q1, &Q2);
-    printf("\nEl valor de la pila al final de la 2 es: %d",res2);
+    printf("\nEl primer valor de la fila 2 al final es: %d",res2);
 
     return 0;
 }
